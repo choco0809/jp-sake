@@ -6,7 +6,6 @@ const BRANDS_URL = 'https://muro.sakenowa.com/sakenowa-data/api/brands'
 const FLAVOR_URL = 'https://muro.sakenowa.com/sakenowa-data/api/flavor-charts'
 
 class ChoiceFormat {
-
   async choiceSelect (choicesList, topChoiceMassage) {
     return new Promise(resolve => {
       const prompt = new Select({
@@ -28,15 +27,15 @@ class ChoiceFormat {
     return new Promise(resolve => {
       const prompt = new Select({
         message: topChoiceMassage,
-        footer() {
-            const targetFlavor = flavorList.flavorCharts.filter(({brandId}) => brandId === this.focused.value)
-            const f1 = targetFlavor[0] === undefined ? 'undefinde' : targetFlavor[0].f1
-            const f2 = targetFlavor[0] === undefined ? 'undefinde' : targetFlavor[0].f2
-            const f3 = targetFlavor[0] === undefined ? 'undefinde' : targetFlavor[0].f3
-            const f4 = targetFlavor[0] === undefined ? 'undefinde' : targetFlavor[0].f4
-            const f5 = targetFlavor[0] === undefined ? 'undefinde' : targetFlavor[0].f5
-            const f6 = targetFlavor[0] === undefined ? 'undefinde' : targetFlavor[0].f6
-            return '------------------------------\n' +
+        footer () {
+          const targetFlavor = flavorList.flavorCharts.filter(({ brandId }) => brandId === this.focused.value)
+          const f1 = targetFlavor[0] === undefined ? 'undefined' : targetFlavor[0].f1
+          const f2 = targetFlavor[0] === undefined ? 'undefined' : targetFlavor[0].f2
+          const f3 = targetFlavor[0] === undefined ? 'undefined' : targetFlavor[0].f3
+          const f4 = targetFlavor[0] === undefined ? 'undefined' : targetFlavor[0].f4
+          const f5 = targetFlavor[0] === undefined ? 'undefined' : targetFlavor[0].f5
+          const f6 = targetFlavor[0] === undefined ? 'undefined' : targetFlavor[0].f6
+          return '------------------------------\n' +
                    `華やか  ：${f1}\n` +
                    `芳醇    ：${f2}\n` +
                    `重厚    ：${f3}\n` +
