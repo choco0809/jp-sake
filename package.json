@@ -21,6 +21,11 @@
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-promise": "^6.0.0",
+    "standard": "^17.0.0"
+  },
+  "dependencies": {
+    "enquirer": "^2.3.6",
+    "node-fetch": "^2.6.7"
   }
 }
