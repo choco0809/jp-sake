@@ -1,22 +1,22 @@
 const ChoiceFormat = require('./choice-format.js')
 const CommonEnquirer = require('./common-enquirer.js')
-const TOP_CHOICE_MESSAGE = '総合ランキング、地域、フレーバーからあなたにおすすめの日本酒を調べます'
+const TOP_CHOICE_MESSAGE = '総合ランキング、地域からあなたにおすすめの日本酒を調べます'
 const TOP_CHOICE_LIST = [
-  { name: '総合ランキング', value: 'rankings' },
-  { name: '地域', value: 'areas' },
-  { name: 'フレーバー', value: 'flavors' }
+  { name: '総合ランキングから探す', value: 'Rankings' },
+  { name: '地域ランキングから探す', value: 'AreasRankings' },
+  { name: '地域から探す', value: 'Areas' }
 ]
 
 async function main () {
   const choiceFormat = new ChoiceFormat()
   const commonEnquirer = new CommonEnquirer()
   const choiceType = await commonEnquirer.choiceSelect(TOP_CHOICE_LIST, TOP_CHOICE_MESSAGE)
-  if (choiceType === 'rankings') {
+  if (choiceType === 'Rankings') {
     return await choiceFormat.searchForSakeFromRankings()
-  } else if (choiceType === 'areas') {
+  } else if (choiceType === 'AreasRankings') {
+    return await choiceFormat.searchForSakeFromAreasRankings()
+  } else if (choiceType === 'Areas') {
     return await choiceFormat.searchForSakeFromArea()
-  } else if (choiceType === 'flavors') {
-    console.log(choiceType)
   }
 }
 
