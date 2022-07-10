@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const ChoiceFormat = require('./choice-format.js')
 const CommonEnquirer = require('./common-enquirer.js')
 const TOP_CHOICE_MESSAGE = '総合ランキング、地域からあなたにおすすめの日本酒を調べます'
