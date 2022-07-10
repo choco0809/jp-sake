@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-class FtechFormat {
+class FetchFormat {
   // APIからURLに対応するjsonデータを取得する
   async fetchSakenowaApi (url) {
     const response = await fetch(url)
@@ -8,4 +8,4 @@ class FtechFormat {
   }
 }
 
-module.exports = FtechFormat
+module.exports = FetchFormat
