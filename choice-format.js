@@ -1,6 +1,6 @@
 const FetchFormat = require('./fetch-format.js')
 const CommonEnquirer = require('./common-enquirer.js')
-const SearchForSakenowaInfo = require('./search -for-sakenowa-info.js')
+const SearchForSakenowaInfo = require('./search-for-sakenowa-info.js')
 
 const AREA_URL = 'https://muro.sakenowa.com/sakenowa-data/api/areas'
 const BREWERIES_URL = 'https://muro.sakenowa.com/sakenowa-data/api/breweries'
