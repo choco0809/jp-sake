@@ -1,4 +1,4 @@
-# jp-sake
+# jpn-sake
 You can look for Sake from several choices
 
 ### choices
@@ -8,7 +8,7 @@ You can look for Sake from several choices
 
 
 ## install
-`npm install jp-sake`
+`npm install jpn-sake`
 
 ## usage
 You will be presented with several choices, please type or select one and press Enter to answer.
