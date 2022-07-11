@@ -1,6 +1,6 @@
 {
   "name": "jp-sake",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "README",
   "main": "jp-sake.js",
   "bin": {
