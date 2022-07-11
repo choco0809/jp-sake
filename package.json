@@ -13,6 +13,9 @@
     "type": "git",
     "url": "git+https://github.com/choco0809/jp-sake.git"
   },
+  "keywords": [
+    "Sake"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
