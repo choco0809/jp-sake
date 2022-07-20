@@ -13,9 +13,9 @@ async function main () {
   const commonEnquirer = new CommonEnquirer()
   const choiceType = await commonEnquirer.choiceSelect(TOP_CHOICE_LIST, TOP_CHOICE_MESSAGE)
   if (choiceType === 'Rankings') {
-    return await choiceFormat.searchForSakeFromRankings()
+    return await choiceFormat.searchForSakeFromRankings(choiceType)
   } else if (choiceType === 'AreasRankings') {
-    return await choiceFormat.searchForSakeFromAreasRankings()
+    return await choiceFormat.searchForSakeFromAreasRankings(choiceType)
   }
 }
 

@@ -6,7 +6,7 @@ class SearchForSakenowaInfo {
 
   // 蔵元に紐づく地域を探す
   searchForAreaFromBrewery (breweryId, areas) {
-    return areas.filter(areas => areas.id === breweryId)
+    return areas.filter(areas => areas.id === breweryId)[0]
   }
 
   // 蔵元と紐づく銘柄を探す
@@ -15,7 +15,7 @@ class SearchForSakenowaInfo {
   }
 
   // 銘柄と紐づく蔵元を探す
-  searchForBreweryFromBland (brandId, breweries) {
+  searchForBreweryFromBrand (brandId, breweries) {
     return breweries.filter(({ id }) => id === brandId)
   }
 
@@ -25,12 +25,12 @@ class SearchForSakenowaInfo {
   }
 
   // 複数の銘柄から特定の銘柄を探す
-  searchForBlandFromBlandsForArea (barndId, brandsForArea) {
+  searchForBrandFromBrandsForArea (barndId, brandsForArea) {
     return brandsForArea.filter(({ id }) => id === barndId)
   }
 
   // 総合ランキングと紐づく銘柄、蔵元情報を探す
-  searchForBlandsInfoFromRankings (rankings, brands) {
+  searchForBrandsInfoFromRankings (rankings, brands) {
     return rankings.filter(rankings => brands.some(function (brands) {
       if (rankings.brandId !== brands.id) return undefined
       rankings.name = `${rankings.rank.toString().padStart(2, ' ')}位：${brands.name}`
@@ -45,7 +45,7 @@ class SearchForSakenowaInfo {
   }
 
   // 地域ランキングと紐づく銘柄、蔵元情報を探す
-  searchForBlandsInfoFromAreaRankings (rankings) {
+  searchForBrandsInfoFromAreaRankings (rankings) {
     console.log(rankings[0].ranking)
   }
 }
