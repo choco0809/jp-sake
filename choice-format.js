@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const CommonEnquirer = require('./common-enquirer.js')
+const EnquirerFormatter = require('./enquirer-formatter.js')
 const SearchForSakenowaInfo = require('./search-for-sakenowa-info.js')
 
 const AREA_URL = 'https://muro.sakenowa.com/sakenowa-data/api/areas'
@@ -11,7 +11,7 @@ const RANKINGS_URL = 'https://muro.sakenowa.com/sakenowa-data/api/rankings'
 class ChoiceFormat {
   constructor () {
     this.searchForSakenowaInfo = new SearchForSakenowaInfo()
-    this.commonEnquirer = new CommonEnquirer()
+    this.enquirerFormatter = new EnquirerFormatter()
   }
 
   async searchForSakeFromRankings (targetChoiceType) {
@@ -55,14 +55,14 @@ class ChoiceFormat {
   }
 
   async fetchAreaRankings (areasJsonData, targetRankings) {
-    const targetAreaId = await this.commonEnquirer.choiceSelect(this.#changeKeyFromIdtoValue(areasJsonData.areas), '地域を選択してください')
+    const targetAreaId = await this.enquirerFormatter.choiceSelect(this.#changeKeyFromIdtoValue(areasJsonData.areas), '地域を選択してください')
     const areaRankings = targetRankings.filter(({ areaId }) => areaId === targetAreaId)[0].ranking.slice(0, 10)
     return areaRankings
   }
 
   async fetchTargetBrandIdAndFlavor (rankings, targetYearMonth) {
     const flavorJsonData = await this.fetchSakenowaApi(FLAVOR_URL)
-    const targetBrandId = await this.commonEnquirer.choiceSelectFooter(rankings, flavorJsonData, `【 ${targetYearMonth} 】ランキングTOP10`)
+    const targetBrandId = await this.enquirerFormatter.choiceSelectFooter(rankings, flavorJsonData, `【 ${targetYearMonth} 】ランキングTOP10`)
     const targetBrandName = rankings.filter(({ value }) => value === targetBrandId)[0].brandName
     const targetFlavor = this.searchForSakenowaInfo.searchForFlavorFromBrand(targetBrandId, flavorJsonData.flavorCharts)[0]
     const targetBrandIdAndFlavor = { brandId: targetBrandId, brandName: targetBrandName, flavor: targetFlavor }
