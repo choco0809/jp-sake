@@ -3,7 +3,7 @@ You can look for Sake from several choices
 
 ### choices
 1. Search by Overall Ranking
-1. Search by　Area Ranking
+1. Search by Area Ranking
 
 ## install
 `npm install jpn-sake`
