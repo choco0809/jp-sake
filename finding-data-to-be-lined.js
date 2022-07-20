@@ -1,4 +1,4 @@
-class SearchForSakenowaInfo {
+class FindingDataToBeLined {
   // 蔵元に紐づく地域を探す
   searchForAreaFromBrewery (breweryId, areas) {
     return areas.filter(areas => areas.id === breweryId)[0]
@@ -30,4 +30,4 @@ class SearchForSakenowaInfo {
   }
 }
 
-module.exports = SearchForSakenowaInfo
+module.exports = FindingDataToBeLined
