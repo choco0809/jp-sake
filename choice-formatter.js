@@ -8,7 +8,7 @@ const BRANDS_URL = 'https://muro.sakenowa.com/sakenowa-data/api/brands'
 const FLAVOR_URL = 'https://muro.sakenowa.com/sakenowa-data/api/flavor-charts'
 const RANKINGS_URL = 'https://muro.sakenowa.com/sakenowa-data/api/rankings'
 
-class ChoiceFormat {
+class ChoiceFormatter {
   constructor () {
     this.searchForSakenowaInfo = new SearchForSakenowaInfo()
     this.enquirerFormatter = new EnquirerFormatter()
@@ -112,4 +112,4 @@ class ChoiceFormat {
   }
 }
 
-module.exports = ChoiceFormat
+module.exports = ChoiceFormatter
