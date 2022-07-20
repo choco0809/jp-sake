@@ -4,7 +4,7 @@ const ChoiceFormatter = require('./choice-formatter.js')
 const EnquirerFormatter = require('./enquirer-formatter.js')
 const TOP_CHOICE_MESSAGE = '全国総合ランキング、地域ランキングからあなたにおすすめの日本酒を調べます'
 const TOP_CHOICE_LIST = [
-  { name: '総合ランキングから探す', value: 'Rankings' },
+  { name: '全国総合ランキングから探す', value: 'Rankings' },
   { name: '地域ランキングから探す', value: 'AreasRankings' }
 ]
 
