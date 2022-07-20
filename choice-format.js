@@ -1,4 +1,4 @@
-const FetchFormat = require('./fetch-format.js')
+const fetch = require('node-fetch')
 const CommonEnquirer = require('./common-enquirer.js')
 const SearchForSakenowaInfo = require('./search-for-sakenowa-info.js')
 
@@ -10,14 +10,13 @@ const RANKINGS_URL = 'https://muro.sakenowa.com/sakenowa-data/api/rankings'
 
 class ChoiceFormat {
   constructor () {
-    this.fetchFormat = new FetchFormat()
     this.searchForSakenowaInfo = new SearchForSakenowaInfo()
     this.commonEnquirer = new CommonEnquirer()
   }
 
   async searchForSakeFromRankings (targetChoiceType) {
     const targetRankingsAndYearMonth = await this.fetchTargetRankingsAndTargetYearMonth(targetChoiceType)
-    const areasJsonData = await this.fetchFormat.fetchSakenowaApi(AREA_URL)
+    const areasJsonData = await this.fetchSakenowaApi(AREA_URL)
     const rankings = await this.fetchTargetRankings(targetRankingsAndYearMonth.rankings)
     const targetBrandAndFlavorObject = await this.fetchTargetBrandIdAndFlavor(rankings, targetRankingsAndYearMonth.yearMonth)
     const targetBrewerObject = await this.fetchTargetBrewery(rankings, targetBrandAndFlavorObject.brandId)
@@ -27,7 +26,7 @@ class ChoiceFormat {
 
   async searchForSakeFromAreasRankings (targetChoiceType) {
     const targetRankingsAndYearMonth = await this.fetchTargetRankingsAndTargetYearMonth(targetChoiceType)
-    const areasJsonData = await this.fetchFormat.fetchSakenowaApi(AREA_URL)
+    const areasJsonData = await this.fetchSakenowaApi(AREA_URL)
     const areaRankings = await this.fetchAreaRankings(areasJsonData, targetRankingsAndYearMonth.rankings)
     const rankings = await this.fetchTargetRankings(areaRankings)
     const targetBrandAndFlavorObject = await this.fetchTargetBrandIdAndFlavor(rankings, targetRankingsAndYearMonth.yearMonth)
@@ -36,14 +35,19 @@ class ChoiceFormat {
     return this.#sakeInfo(targetBrandAndFlavorObject.brandName, targetAreaObject.name, targetBrewerObject.name, targetBrandAndFlavorObject.flavor)
   }
 
+  async fetchSakenowaApi (url) {
+    const response = await fetch(url)
+    return response.json()
+  }
+
   async fetchTargetRankings (targetRankings) {
-    const brandsJsonData = await this.fetchFormat.fetchSakenowaApi(BRANDS_URL)
+    const brandsJsonData = await this.fetchSakenowaApi(BRANDS_URL)
     const choiceRankings = this.searchForSakenowaInfo.searchForBrandsInfoFromRankings(targetRankings, brandsJsonData.brands)
     return choiceRankings
   }
 
   async fetchTargetRankingsAndTargetYearMonth (targetChoiceType) {
-    const rankingsJsonData = await this.fetchFormat.fetchSakenowaApi(RANKINGS_URL)
+    const rankingsJsonData = await this.fetchSakenowaApi(RANKINGS_URL)
     const targetRankings = this.#fetchChoiceRankings(targetChoiceType, rankingsJsonData)
     const targetYearMonth = rankingsJsonData.yearMonth
     const targetRankingsAndYearMonth = { rankings: targetRankings, yearMonth: targetYearMonth }
@@ -57,7 +61,7 @@ class ChoiceFormat {
   }
 
   async fetchTargetBrandIdAndFlavor (rankings, targetYearMonth) {
-    const flavorJsonData = await this.fetchFormat.fetchSakenowaApi(FLAVOR_URL)
+    const flavorJsonData = await this.fetchSakenowaApi(FLAVOR_URL)
     const targetBrandId = await this.commonEnquirer.choiceSelectFooter(rankings, flavorJsonData, `【 ${targetYearMonth} 】ランキングTOP10`)
     const targetBrandName = rankings.filter(({ value }) => value === targetBrandId)[0].brandName
     const targetFlavor = this.searchForSakenowaInfo.searchForFlavorFromBrand(targetBrandId, flavorJsonData.flavorCharts)[0]
@@ -66,7 +70,7 @@ class ChoiceFormat {
   }
 
   async fetchTargetBrewery (rankings, brandId) {
-    const breweriesJsonData = await this.fetchFormat.fetchSakenowaApi(BREWERIES_URL)
+    const breweriesJsonData = await this.fetchSakenowaApi(BREWERIES_URL)
     const targetBreweyId = rankings.filter(({ value }) => brandId === value)
     const targetBrewerObject = this.searchForSakenowaInfo.searchForBreweryFromBrand(targetBreweyId[0].breweryId, breweriesJsonData.breweries)[0]
     return targetBrewerObject
