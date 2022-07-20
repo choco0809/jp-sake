@@ -20,13 +20,13 @@ class SearchForSakenowaInfo {
   }
 
   // 銘柄のフレーバー情報を探す
-  searchForFlavorFromBrand (brandId, fravors) {
-    return fravors.filter(fravors => fravors.brandId === brandId)
+  searchForFlavorFromBrand (brandId, flavors) {
+    return flavors.filter(flavors => flavors.brandId === brandId)
   }
 
   // 複数の銘柄から特定の銘柄を探す
-  searchForBrandFromBrandsForArea (barndId, brandsForArea) {
-    return brandsForArea.filter(({ id }) => id === barndId)
+  searchForBrandFromBrandsForArea (brandId, brandsForArea) {
+    return brandsForArea.filter(({ id }) => id === brandId)
   }
 
   // 総合ランキングと紐づく銘柄、蔵元情報を探す

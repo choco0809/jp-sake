@@ -42,22 +42,19 @@ class ChoiceFormatter {
 
   async fetchTargetRankings (targetRankings) {
     const brandsJsonData = await this.fetchSakenowaApi(BRANDS_URL)
-    const choiceRankings = this.searchForSakenowaInfo.searchForBrandsInfoFromRankings(targetRankings, brandsJsonData.brands)
-    return choiceRankings
+    return this.searchForSakenowaInfo.searchForBrandsInfoFromRankings(targetRankings, brandsJsonData.brands)
   }
 
   async fetchTargetRankingsAndTargetYearMonth (targetChoiceType) {
     const rankingsJsonData = await this.fetchSakenowaApi(RANKINGS_URL)
     const targetRankings = this.#fetchChoiceRankings(targetChoiceType, rankingsJsonData)
     const targetYearMonth = rankingsJsonData.yearMonth
-    const targetRankingsAndYearMonth = { rankings: targetRankings, yearMonth: targetYearMonth }
-    return targetRankingsAndYearMonth
+    return { rankings: targetRankings, yearMonth: targetYearMonth }
   }
 
   async fetchAreaRankings (areasJsonData, targetRankings) {
     const targetAreaId = await this.enquirerFormatter.choiceSelect(this.#changeKeyFromIdtoValue(areasJsonData.areas), '地域を選択してください')
-    const areaRankings = targetRankings.filter(({ areaId }) => areaId === targetAreaId)[0].ranking.slice(0, 10)
-    return areaRankings
+    return targetRankings.filter(({ areaId }) => areaId === targetAreaId)[0].ranking.slice(0, 10)
   }
 
   async fetchTargetBrandIdAndFlavor (rankings, targetYearMonth) {
@@ -65,22 +62,19 @@ class ChoiceFormatter {
     const targetBrandId = await this.enquirerFormatter.choiceSelectFooter(rankings, flavorJsonData, `【 ${targetYearMonth} 】ランキングTOP10`)
     const targetBrandName = rankings.filter(({ value }) => value === targetBrandId)[0].brandName
     const targetFlavor = this.searchForSakenowaInfo.searchForFlavorFromBrand(targetBrandId, flavorJsonData.flavorCharts)[0]
-    const targetBrandIdAndFlavor = { brandId: targetBrandId, brandName: targetBrandName, flavor: targetFlavor }
-    return targetBrandIdAndFlavor
+    return { brandId: targetBrandId, brandName: targetBrandName, flavor: targetFlavor }
   }
 
   async fetchTargetBrewery (rankings, brandId) {
     const breweriesJsonData = await this.fetchSakenowaApi(BREWERIES_URL)
     const targetBreweyId = rankings.filter(({ value }) => brandId === value)
-    const targetBrewerObject = this.searchForSakenowaInfo.searchForBreweryFromBrand(targetBreweyId[0].breweryId, breweriesJsonData.breweries)[0]
-    return targetBrewerObject
+    return this.searchForSakenowaInfo.searchForBreweryFromBrand(targetBreweyId[0].breweryId, breweriesJsonData.breweries)[0]
   }
 
   #changeKeyFromIdtoValue (array) {
-    const convertArray = array.map(value => {
+    return array.map(value => {
       return { name: value.name, value: value.id }
     })
-    return convertArray
   }
 
   #fetchChoiceRankings (targetChoiceType, rankingsJsonData) {
