@@ -1,6 +1,6 @@
 const { Select } = require('enquirer')
 
-class CommonEnquirer {
+class EnquirerFormatter {
   async choiceSelect (choicesList, topChoiceMassage) {
     return new Promise(resolve => {
       const prompt = new Select({
@@ -53,4 +53,4 @@ class CommonEnquirer {
   }
 }
 
-module.exports = CommonEnquirer
+module.exports = EnquirerFormatter
